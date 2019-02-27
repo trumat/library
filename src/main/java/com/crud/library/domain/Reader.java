@@ -1,5 +1,6 @@
 package com.crud.library.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "READERS")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Reader {
     private int id;
     private String firstname;
@@ -70,15 +72,4 @@ public class Reader {
     }
 
     private void setRents(List<Rent> rents) { this.rents = rents; }
-
-    @Override
-    public String toString() {
-        return "Reader{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", accountCreated=" + accountCreated +
-                ", rents=" + rents +
-                '}';
-    }
 }

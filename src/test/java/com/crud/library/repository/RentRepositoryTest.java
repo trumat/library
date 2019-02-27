@@ -37,7 +37,8 @@ public class RentRepositoryTest {
 
         //When
         rentRepository.save(rent);
-        Rent retrievedRent = rentRepository.findOne(1);
+        int id = rent.getId();
+        Rent retrievedRent = rentRepository.findOne(id);
 
         //Then
         assertEquals(BookStatus.AVAILABLE, retrievedRent.getBookCopy().getStatus());

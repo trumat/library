@@ -21,7 +21,8 @@ public class ReaderRepositoryTest {
         Reader reader = new Reader("John", "Smith");
         //When
         readerRepository.save(reader);
-        Reader retrievedReader = readerRepository.findOne(1);
+        int id = reader.getId();
+        Reader retrievedReader = readerRepository.findOne(id);
         //Then
         assertEquals("John", retrievedReader.getFirstname());
     }

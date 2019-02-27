@@ -21,7 +21,8 @@ public class BookRepositoryTest {
         Book book = new Book("Test title", "Test author", 1999);
         //When
         bookRepository.save(book);
-        Book retrievedBook = bookRepository.findOne(1);
+        int id = book.getId();
+        Book retrievedBook = bookRepository.findOne(id);
         //Then
         assertEquals(1999, retrievedBook.getPubYear());
     }

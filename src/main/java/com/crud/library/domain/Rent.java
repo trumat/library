@@ -1,5 +1,6 @@
 package com.crud.library.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "RENTS")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Rent {
     private int id;
     private BookCopy bookCopy;

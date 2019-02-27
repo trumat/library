@@ -1,6 +1,8 @@
 package com.crud.library.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "BOOK_COPIES")
 @NoArgsConstructor
+@AllArgsConstructor
 public class BookCopy {
     private int id;
     private BookStatus status;
@@ -49,7 +52,7 @@ public class BookCopy {
         this.id = id;
     }
 
-    private void setStatus(BookStatus status) {
+    public void setStatus(BookStatus status) {
         this.status = status;
     }
 

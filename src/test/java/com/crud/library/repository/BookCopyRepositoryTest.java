@@ -27,7 +27,8 @@ public class BookCopyRepositoryTest {
         BookCopy bookCopy = new BookCopy(BookStatus.AVAILABLE, book);
         //When
         bookCopyRepository.save(bookCopy);
-        BookCopy retrievedBookCopy = bookCopyRepository.findOne(1);
+        int id = bookCopy.getId();
+        BookCopy retrievedBookCopy = bookCopyRepository.findOne(id);
         //Then
         assertEquals(BookStatus.AVAILABLE, retrievedBookCopy.getStatus());
         assertEquals("Test title", retrievedBookCopy.getBook().getTitle());
