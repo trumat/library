@@ -8,6 +8,9 @@ import com.crud.library.dto.BookCopyDto;
 import com.crud.library.dto.BookDto;
 import com.crud.library.dto.ReaderDto;
 import com.crud.library.dto.RentDto;
+import com.crud.library.exception.BookNotAvailableException;
+import com.crud.library.exception.RentAlreadyReturnedException;
+import com.crud.library.exception.RentNotFoundException;
 import com.crud.library.mapper.BookCopyMapper;
 import com.crud.library.mapper.BookMapper;
 import com.crud.library.mapper.ReaderMapper;
@@ -105,8 +108,23 @@ public class LibraryController {
         return bookCopyService.checkNumberOfCopiesWithStatus(status, bookId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/rents")
-    public RentDto rentBook(@RequestParam int readerId, @RequestParam int bookId) {
-        return rentMapper.mapToRentDto(rentService.rentBook(bookId, readerId));
+    @RequestMapping(method = RequestMethod.GET, value = "/readers/{readerId}/rents")
+    public List<RentDto> getRentsOfReader(@PathVariable int readerId) throws EntityNotFoundException{
+        return rentMapper.mapToRentDtos(rentService.findRentsOfReader(readerId));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/readers/{readerId}/rents")
+    public RentDto rentBook(@PathVariable int readerId, @RequestParam int bookId) throws BookNotAvailableException, EntityNotFoundException{
+        int availableCopies = bookCopyService.checkNumberOfCopiesWithStatus(BookStatus.AVAILABLE, bookId);
+        if (availableCopies == 0) {
+            throw new BookNotAvailableException();
+        } else {
+            return rentMapper.mapToRentDto(rentService.rentBook(bookId, readerId));
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/readers/rents/{rentId}")
+    public RentDto returnBook(@PathVariable int rentId, @RequestParam ActionType actionType) throws RentNotFoundException, RentAlreadyReturnedException {
+        return rentMapper.mapToRentDto(rentService.returnBook(rentId, actionType));
     }
 }

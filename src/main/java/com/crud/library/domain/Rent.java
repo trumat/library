@@ -70,7 +70,7 @@ public class Rent {
         this.rentDate = rentDate;
     }
 
-    private void setReturnDate(Date returnDate) {
+    public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
 }

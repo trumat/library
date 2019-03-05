@@ -1,5 +1,6 @@
 package com.crud.library.repository;
 
+import com.crud.library.domain.Reader;
 import com.crud.library.domain.Rent;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,6 @@ import java.util.List;
 public interface RentRepository extends CrudRepository<Rent, Integer> {
     @Override
     List<Rent> findAll();
+
+    List<Rent> findAllByReader(Reader reader);
 }
